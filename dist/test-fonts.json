@@ -1,0 +1,12 @@
+[
+  {
+    "id": "attach",
+    "name": "Attach",
+    "unicode": ["ea01", "attach"]
+  },
+{
+    "id": "chat-round",
+    "name": "Chat Round",
+    "unicode": ["ea02", "chat_round"]
+  }
+]

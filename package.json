@@ -1,0 +1,58 @@
+{
+  "name": "test-fonts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "clean": "npx rimraf dist/*",
+    "copy": "npx cpy README.md dist/",
+    "html": "npx webfont assets/icons/*.svg -t html --dest dist --dest-template dist --verbose --font-height 1792 --normalize --font-name $(node -p 'require(\"./package.json\").name') --template-cache-string $(node -p 'require(\"./package.json\").version')",
+    "scss": "npx webfont assets/icons/*.svg -t scss --dest dist --dest-template dist --verbose --font-height 1792 --normalize -r '' --font-name $(node -p 'require(\"./package.json\").name') --template-cache-string $(node -p 'require(\"./package.json\").version')",
+    "css": "npx webfont assets/icons/*.svg -t css --dest dist --dest-template dist --verbose --font-height 1792 --normalize -r '' --font-name $(node -p 'require(\"./package.json\").name') --template-cache-string $(node -p 'require(\"./package.json\").version')",
+    "json": "npx webfont assets/icons/*.svg -t json --dest dist --dest-template dist --verbose --font-height 1792 --normalize -r '' --font-name $(node -p 'require(\"./package.json\").name') --template-cache-string $(node -p 'require(\"./package.json\").version')",
+    "build": "npm-run-all -p -r html css scss json",
+    "rename": "npx rename -f dist/$(node -p 'require(\"./package.json\").name').html index.html",
+    "archive": "npx jszip-cli a -v -i dist/*.zip -o dist/$(node -p 'require(\"./package.json\").name + \"_\" + require(\"./package.json\").version').zip dist/*",
+    "dist": "npm-run-all -s clean build rename copy",
+    "open": "npx open dist/index.html",
+    "serve": "npm-run-all dist open -s",
+    "postinstall": "npm run dist",
+    "release": "npx release-it --no-npm.publish --no-git.requireCleanWorkingDir"
+  },
+  "release-it": {
+    "hooks": {
+      "after:bump": "npm run dist archive && npx auto-changelog -p && git add . --all"
+    }
+  },
+  "auto-changelog": {
+    "output": "README.md",
+    "template": "assets/templates/changelog.hbs"
+  },
+  "devDependencies": {
+    "cpy": "^7.3.0",
+    "cpy-cli": "^2.0.0",
+    "jszip": "^3.2.2",
+    "jszip-cli": "^1.4.24",
+    "npm-run-all": "^4.1.5",
+    "open": "^6.4.0",
+    "open-cli": "^5.0.0",
+    "release-it": "^12.3.5",
+    "rename": "^1.0.4",
+    "rename-cli": "^6.0.0",
+    "rimraf": "^3.0.0",
+    "webfont": "github:mpalpha/webfont"
+  },
+  "description": "test project for mpalpha/webfont",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpalpha/test-fonts.git"
+  },
+  "author": "Jason Lusk",
+  "bugs": {
+    "url": "https://github.com/mpalpha/test-fonts/issues"
+  },
+  "homepage": "https://github.com/mpalpha/test-fonts#readme",
+  "dependencies": {
+    "mem": "^5.1.1"
+  }
+}

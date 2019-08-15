@@ -1,0 +1,111 @@
+@font-face {
+  font-family: "test-fonts";
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto;
+  src: url("./test-fonts.eot?1.0.0");
+  src: url("./test-fonts.eot?#iefix") format("embedded-opentype"), url("./test-fonts.woff2?1.0.0") format("woff2"), url("./test-fonts.woff?1.0.0") format("woff"), url("./test-fonts.ttf?1.0.0") format("truetype"), url("./test-fonts.svg?1.0.0#test-fonts") format("svg");
+}
+
+.test-fonts {
+  display: inline-block;
+  font-family: "test-fonts";
+  font-weight: 400;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+.test-fonts-lg {
+  font-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -0.0667em;
+}
+
+.test-fonts-xs {
+  font-size: 0.75em;
+}
+
+.test-fonts-sm {
+  font-size: 0.875em;
+}
+
+.test-fonts-1x {
+  font-size: 1em;
+}
+
+.test-fonts-2x {
+  font-size: 2em;
+}
+
+.test-fonts-3x {
+  font-size: 3em;
+}
+
+.test-fonts-4x {
+  font-size: 4em;
+}
+
+.test-fonts-5x {
+  font-size: 5em;
+}
+
+.test-fonts-6x {
+  font-size: 6em;
+}
+
+.test-fonts-7x {
+  font-size: 7em;
+}
+
+.test-fonts-8x {
+  font-size: 8em;
+}
+
+.test-fonts-9x {
+  font-size: 9em;
+}
+
+.test-fonts-10x {
+  font-size: 10em;
+}
+
+.test-fonts-fw {
+  text-align: center;
+  width: 1.25em;
+}
+
+.test-fonts-border {
+  border: solid 0.08em #eee;
+  border-radius: 0.1em;
+  padding: 0.2em 0.25em 0.15em;
+}
+
+.test-fonts-pull-left {
+  float: left;
+}
+
+.test-fonts-pull-right {
+  float: right;
+}
+
+.test-fonts.test-fonts-pull-left {
+  margin-right: 0.3em;
+}
+
+.test-fonts.test-fonts-pull-right {
+  margin-left: 0.3em;
+}
+
+
+.test-fonts-attach::before {
+  content: "\ea01";
+}
+
+.test-fonts-chat-round::before {
+  content: "\ea02";
+}
+
