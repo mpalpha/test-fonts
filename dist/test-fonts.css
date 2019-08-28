@@ -17,6 +17,61 @@
   line-height: 1;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  -webkit-font-feature-settings: 'liga';
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.test-fonts-spin {
+  animation: test-fonts-spin 2s infinite linear;
+}
+
+@keyframes test-fonts-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+.test-fonts-pulse {
+  animation: test-fonts-pulse 1s infinite steps(8);
+}
+
+@keyframes test-fonts-pulse {
+  0% {
+    transform: scale(0.999);
+  }
+
+  30% {
+    transform: scale(0.999);
+  }
+
+  40% {
+    transform: scale(1.08);
+  }
+
+  50% {
+    transform: scale(0.999);
+  }
+
+  60% {
+    transform: scale(0.999);
+  }
+
+  70% {
+    transform: scale(1.05);
+  }
+
+  80% {
+    transform: scale(0.999);
+  }
+
+  100% {
+    transform: scale(0.999);
+  }
 }
 
 .test-fonts-lg {
@@ -101,11 +156,11 @@
 }
 
 
-.test-fonts-attach::before {
+.test-fonts.attach::before {
   content: "\ea01";
 }
 
-.test-fonts-chat-round::before {
+.test-fonts.chat-round::before {
   content: "\ea02";
 }
 
