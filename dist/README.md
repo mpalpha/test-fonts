@@ -1,30 +1,33 @@
 ## test-fonts
-test for mpalpha/webfont
+Icon set test for mpalpha/webfonts
 
-### requirements:
+&nbsp;
+### Requirements
 nodejs 11+
 
-### use:
+### Use
 
-#### build:
-```npm run build```
+* build:
+```npm run build```  
 
-#### serve:
+* serve:
 ```npm run serve```
 
-#### release:
+* release:
 ```npm run release```
 
 &nbsp;  
-&nbsp;  
 
-## Changelog
+### Changelog
+
+#### [1.0.3](https://github.com/mpalpha/test-fonts/compare/1.0.2...1.0.3) - 2019-08-28
 
 #### [1.0.2](https://github.com/mpalpha/test-fonts/compare/1.0.1...1.0.2) - 2019-08-28
 
 ##### Commits
 
 - update templates [`9d2cf62`](https://github.com/mpalpha/test-fonts/commit/9d2cf62231a996cd6acf2d514739b79675acd9cb)
+- Release 1.0.2 [`5f9bc7c`](https://github.com/mpalpha/test-fonts/commit/5f9bc7cc805eaec22ad8c6ff92e5938412cde8a9)
 
 #### 1.0.1 - 2019-08-15
 
