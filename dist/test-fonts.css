@@ -3,8 +3,8 @@
   font-style: normal;
   font-weight: 400;
   font-display: auto;
-  src: url("./test-fonts.eot?1.0.4");
-  src: url("./test-fonts.eot?#iefix") format("embedded-opentype"), url("./test-fonts.woff2?1.0.4") format("woff2"), url("./test-fonts.woff?1.0.4") format("woff"), url("./test-fonts.ttf?1.0.4") format("truetype"), url("./test-fonts.svg?1.0.4#test-fonts") format("svg");
+  src: url("./test-fonts.eot?1.0.5");
+  src: url("./test-fonts.eot?#iefix") format("embedded-opentype"), url("./test-fonts.woff2?1.0.5") format("woff2"), url("./test-fonts.woff?1.0.5") format("woff"), url("./test-fonts.ttf?1.0.5") format("truetype"), url("./test-fonts.svg?1.0.5#test-fonts") format("svg");
 }
 
 .test-fonts {

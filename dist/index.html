@@ -30,13 +30,15 @@
       th, td {
         text-align: left;
         padding: 1rem;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid #ccc;
         white-space: nowrap;
       }
       
-      tbody tr:hover {background-color: #f5f5f5;}
+      tbody tr:hover {background-color: #dfdfdf;}
       
-      tbody tr:nth-child(even) {background-color: #f2f2f2;}
+      .hide {display: none;}
+
+      .even {background-color: #f5f5f5;}
 
       .text-center {
         text-align: center;
@@ -45,14 +47,21 @@
       .overflow-x-auto {
         overflow-x: auto;
       }
+      
+      tr i {
+        transition: transform .2s; /* Animation */
+      }
+      tr:hover i {
+        transform: scale(1.75); /* (175% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+      }
 
       @font-face {
         font-family: "test-fonts";
         font-style: normal;
         font-weight: 400;
         font-display: auto;
-        src: url("./test-fonts.eot?1.0.4");
-        src: url("./test-fonts.eot?#iefix") format("embedded-opentype"), url("./test-fonts.woff2?1.0.4") format("woff2"), url("./test-fonts.woff?1.0.4") format("woff"), url("./test-fonts.ttf?1.0.4") format("truetype"), url("./test-fonts.svg?1.0.4#test-fonts") format("svg");
+        src: url("./test-fonts.eot?1.0.5");
+        src: url("./test-fonts.eot?#iefix") format("embedded-opentype"), url("./test-fonts.woff2?1.0.5") format("woff2"), url("./test-fonts.woff?1.0.5") format("woff"), url("./test-fonts.ttf?1.0.5") format("truetype"), url("./test-fonts.svg?1.0.5#test-fonts") format("svg");
       }
 
       .test-fonts {
@@ -203,12 +212,12 @@
 
       
       .test-fonts.attach::before {
-        /* content: "\ea01"; */
+        content: "\ea01";
         content: "attach";
       }
       
       .test-fonts.chat-round::before {
-        /* content: "\ea02"; */
+        content: "\ea02";
         content: "chat_round";
       }
       
@@ -230,7 +239,7 @@
         <tbody>
           
           <tr>
-            <td><i class="test-fonts test-fonts-3x attach"></i></td>
+            <td><i class="test-fonts test-fonts-2x attach"></i></td>
             <td>.attach</td>
             <td>attach</td>
             <td>
@@ -239,7 +248,7 @@
           </tr>
           
           <tr>
-            <td><i class="test-fonts test-fonts-3x chat-round"></i></td>
+            <td><i class="test-fonts test-fonts-2x chat-round"></i></td>
             <td>.chat-round</td>
             <td>chat_round</td>
             <td>
@@ -264,13 +273,16 @@
             Arr.forEach.call(tables, function(table) {
               Arr.forEach.call(table.tBodies, function(tbody) {
                 Arr.forEach.call(tbody.rows, _filter);
+                ([...tbody.querySelectorAll('tr:not(.hide)')]).forEach(function(row, index){
+                  row.classList.toggle('even', ~index & 1);
+                });
               });
             });
           }
 
           function _filter(row) {
             var text = row.children[2].textContent.toLowerCase(), val = _input.value.toLowerCase();
-            row.style.display = text.replace(/_/g, ' ').indexOf(val) === -1 ? 'none' : 'table-row';
+            row.classList.toggle('hide', text.replace(/_/g, ' ').indexOf(val) === -1)
           }
 
           return {
@@ -278,6 +290,7 @@
               var inputs = document.getElementsByClassName('light-table-filter');
               Arr.forEach.call(inputs, function(input) {
                 input.oninput = _onInputEvent;
+                _onInputEvent({target: input});
               });
             }
           };
