@@ -199,6 +199,7 @@ display: inline-block;
 
 {% for glyph in glyphs %}
 .{{ className }}.{{ glyph.name }}::before {
-    content: "\{{ glyph.unicode[0].charCodeAt(0).toString(16) }}";
+  /* content: "\{{ glyph.unicode[0].charCodeAt(0).toString(16) }}"; */
+  content: "{{ glyph.unicode[1] }}";
 }
 {% endfor %}

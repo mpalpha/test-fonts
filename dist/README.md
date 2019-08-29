@@ -20,7 +20,17 @@ nodejs 11+
 
 ### Changelog
 
+#### [1.0.4](https://github.com/mpalpha/test-fonts/compare/1.0.3...1.0.4) - 2019-08-28
+
+##### Commits
+
+- update task scripts [`dd6b5d7`](https://github.com/mpalpha/test-fonts/commit/dd6b5d7b07af7a007a2ce3345332bf14525a7f13)
+
 #### [1.0.3](https://github.com/mpalpha/test-fonts/compare/1.0.2...1.0.3) - 2019-08-28
+
+##### Commits
+
+- Release 1.0.3 [`9046f3b`](https://github.com/mpalpha/test-fonts/commit/9046f3b26996df3ae5b16da965dd53cd359c6832)
 
 #### [1.0.2](https://github.com/mpalpha/test-fonts/compare/1.0.1...1.0.2) - 2019-08-28
 

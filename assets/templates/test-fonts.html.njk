@@ -4,103 +4,55 @@
     <meta charset="utf-8">
     <title>{{ fontName }}</title>
     <style>
-      body {
-        min-width: calc(24rem * 0.625);
+      * {
+        padding: 0%;
         margin: 0%;
-        padding: 1rem;
+      }
+      body {
+        margin: 0%;
+        padding: 1rem 0%;
         background: #fff;
         color: #222;
         font-family:"Helvetica Neue", Arial, sans-serif;
       }
 
-      h1 {
-        margin:0% 0% 2rem;
+      h1, .light-table-filter {
+        margin: 1rem;
         font-size: 2rem;
         font-weight: normal;
       }
-      
-      h3 {
-        display: flex;
-        flex-flow: row wrap;
-        align-items: baseline;
-      }
-      
-      h3 > * {
-        display: inline-block;
-      }
-      
-      h3 pre {
-        font-weight: normal;
-        display: inline-block;
-        margin: 0%;
-        flex: 1;
-      }
 
-      .icons {
-        margin-top: 1rem;
-        margin-bottom: 2rem;
-        display: flex;
-        flex-flow: row wrap;
-      }
-
-      .icons__item {
-        padding: 0.4rem 0%;
-        text-align: center;
+      table {
         width: 100%;
+        border-spacing: 0px;
       }
-
-      .icons__item i, .icons__item span {
-        display: inline-block;
-      }
-
-      .icons__item,
-      .icons__item i {
-        vertical-align: middle;
-      }
-
-      .icons__item:hover {
-        color: #3c90be;
-      }
-
-      .icons__item span {
-        line-height: 3em;
+      
+      th, td {
+        text-align: left;
+        padding: 1rem;
+        border-bottom: 1px solid #ccc;
         white-space: nowrap;
       }
       
-      @media screen and (min-width: 480px) {
-        .icons__item {
-          width: calc(100% / 2)
-        }  
-      }
+      tbody tr:hover {background-color: #dfdfdf;}
       
-      @media screen and (min-width: 640px) {
-        .icons__item {
-          width: calc(100% / 3)
-        }  
-      }
-      
-      @media screen and (min-width: 1024px) {
-        .icons__item {
-          width: calc(100% / 4)
-        }  
-      }
-      
-      @media screen and (min-width: 1200px) {
-        .icons__item {
-          width: calc(100% / 5)
-        }  
+      .hide {display: none;}
+
+      .even {background-color: #f5f5f5;}
+
+      .text-center {
+        text-align: center;
       }
 
-      @media screen and (min-width: 1440px) {
-        .icons__item {
-          width: calc(100% / 6)
-        }  
+      .overflow-x-auto {
+        overflow-x: auto;
       }
-
-      @media screen and (min-width: 1920px) {
-        .icons__item {
-          width: calc(100% / 8)
-        }  
+      
+      tr i {
+        transition: transform .2s; /* Animation */
+      }
+      tr:hover i {
+        transform: scale(1.75); /* (175% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
       }
 
       @font-face {
@@ -290,37 +242,82 @@
       {% for glyph in glyphs %}
       .{{ className }}.{{ glyph.name }}::before {
         content: "\{{ glyph.unicode[0].charCodeAt(0).toString(16) }}";
+        content: "{{ glyph.unicode[1] }}";
       }
       {% endfor %}
     </style>
   </head>
   <body>
     <h1>Icons: {{ className }}</h1>
-      <h3>
-        <span>Class:&nbsp;</span>
-        <pre>{{ '<i class="' | escape }}{{ className }} {{ glyphs[0].name }}{{ '"></i>' | escape }}</pre>
-      </h3>
-      <hr>
-      <div class="icons" id="icon-classes">
+    <input type="search" class="light-table-filter" data-table="order-table" placeholder="Search">
+    <div class="overflow-x-auto">
+      <table class="order-table table">
+        <thead>
+          <tr>
+            <th>Icon</th>
+            <th>Class</th>
+            <th>Ligature</th>
+            <th>Code</th>
+          </tr>
+        </thead>
+        <tbody>
           {% for glyph in glyphs %}
-            <div class="icons__item">
-              <i class="{{ className }} {{ className }}-4x {{ glyph.name }}"></i><br />
-              <span>.{{ glyph.name }}</span>
-            </div>
+          <tr>
+            <td><i class="{{ className }} {{ className }}-2x {{ glyph.name }}"></i></td>
+            <td>.{{ glyph.name }}</td>
+            <td>{{glyph.unicode[1]}}</td>
+            <td>
+              <pre>{{ '<i class="' | escape }}{{ className }}{{ '">'  | escape }}{{glyph.unicode[1]}}{{'</i>' | escape }}</pre>
+            </td>
+          </tr>
           {% endfor %}
-      </div>
-      <h3>
-        <span>Ligature:&nbsp;</span>
-        <pre>{{ '<i class="' | escape }}{{ className }}{{ '">'  | escape }}{{glyphs[0].unicode[1]}}{{'</i>' | escape }}</pre>
-      </h3>
-      <hr>
-      <div class="icons" id="icon-ligatures">
-          {% for glyph in glyphs %}
-            <div class="icons__item">
-              <i class="{{ className }} {{ className }}-4x">{{ glyph.unicode[1] }}</i><br />
-              <span>{{ glyph.unicode[1] }}</span>
-            </div>
-          {% endfor %}
-      </div>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      (function(document) {
+        'use strict';
+
+        var LightTableFilter = (function(Arr) {
+
+          var _input;
+
+          function _onInputEvent(e) {
+            _input = e.target;
+            var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+            Arr.forEach.call(tables, function(table) {
+              Arr.forEach.call(table.tBodies, function(tbody) {
+                Arr.forEach.call(tbody.rows, _filter);
+                ([...tbody.querySelectorAll('tr:not(.hide)')]).forEach(function(row, index){
+                  row.classList.toggle('even', ~index & 1);
+                });
+              });
+            });
+          }
+
+          function _filter(row) {
+            var text = row.children[2].textContent.toLowerCase(), val = _input.value.toLowerCase();
+            row.classList.toggle('hide', text.replace(/_/g, ' ').indexOf(val) === -1)
+          }
+
+          return {
+            init: function() {
+              var inputs = document.getElementsByClassName('light-table-filter');
+              Arr.forEach.call(inputs, function(input) {
+                input.oninput = _onInputEvent;
+                _onInputEvent({target: input});
+              });
+            }
+          };
+        })(Array.prototype);
+
+        document.addEventListener('readystatechange', function() {
+          if (document.readyState === 'complete') {
+            LightTableFilter.init();
+          }
+        });
+
+      })(document);
+    </script>
   </body>
 </html>

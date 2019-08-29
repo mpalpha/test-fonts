@@ -4,103 +4,46 @@
     <meta charset="utf-8">
     <title>test-fonts</title>
     <style>
-      body {
-        min-width: calc(24rem * 0.625);
+      * {
+        padding: 0%;
         margin: 0%;
-        padding: 1rem;
+      }
+      body {
+        margin: 0%;
+        padding: 1rem 0%;
         background: #fff;
         color: #222;
         font-family:"Helvetica Neue", Arial, sans-serif;
       }
 
-      h1 {
-        margin:0% 0% 2rem;
+      h1, .light-table-filter {
+        margin: 1rem;
         font-size: 2rem;
         font-weight: normal;
       }
-      
-      h3 {
-        display: flex;
-        flex-flow: row wrap;
-        align-items: baseline;
-      }
-      
-      h3 > * {
-        display: inline-block;
-      }
-      
-      h3 pre {
-        font-weight: normal;
-        display: inline-block;
-        margin: 0%;
-        flex: 1;
-      }
 
-      .icons {
-        margin-top: 1rem;
-        margin-bottom: 2rem;
-        display: flex;
-        flex-flow: row wrap;
-      }
-
-      .icons__item {
-        padding: 0.4rem 0%;
-        text-align: center;
+      table {
         width: 100%;
+        border-spacing: 0px;
       }
-
-      .icons__item i, .icons__item span {
-        display: inline-block;
-      }
-
-      .icons__item,
-      .icons__item i {
-        vertical-align: middle;
-      }
-
-      .icons__item:hover {
-        color: #3c90be;
-      }
-
-      .icons__item span {
-        line-height: 3em;
+      
+      th, td {
+        text-align: left;
+        padding: 1rem;
+        border-bottom: 1px solid #ddd;
         white-space: nowrap;
       }
       
-      @media screen and (min-width: 480px) {
-        .icons__item {
-          width: calc(100% / 2)
-        }  
-      }
+      tbody tr:hover {background-color: #f5f5f5;}
       
-      @media screen and (min-width: 640px) {
-        .icons__item {
-          width: calc(100% / 3)
-        }  
-      }
-      
-      @media screen and (min-width: 1024px) {
-        .icons__item {
-          width: calc(100% / 4)
-        }  
-      }
-      
-      @media screen and (min-width: 1200px) {
-        .icons__item {
-          width: calc(100% / 5)
-        }  
+      tbody tr:nth-child(even) {background-color: #f2f2f2;}
+
+      .text-center {
+        text-align: center;
       }
 
-      @media screen and (min-width: 1440px) {
-        .icons__item {
-          width: calc(100% / 6)
-        }  
-      }
-
-      @media screen and (min-width: 1920px) {
-        .icons__item {
-          width: calc(100% / 8)
-        }  
+      .overflow-x-auto {
+        overflow-x: auto;
       }
 
       @font-face {
@@ -260,52 +203,93 @@
 
       
       .test-fonts.attach::before {
-        content: "\ea01";
+        /* content: "\ea01"; */
+        content: "attach";
       }
       
       .test-fonts.chat-round::before {
-        content: "\ea02";
+        /* content: "\ea02"; */
+        content: "chat_round";
       }
       
     </style>
   </head>
   <body>
     <h1>Icons: test-fonts</h1>
-      <h3>
-        <span>Class:&nbsp;</span>
-        <pre>&lt;i class=&quot;test-fonts attach&quot;&gt;&lt;/i&gt;</pre>
-      </h3>
-      <hr>
-      <div class="icons" id="icon-classes">
+    <input type="search" class="light-table-filter" data-table="order-table" placeholder="Search">
+    <div class="overflow-x-auto">
+      <table class="order-table table">
+        <thead>
+          <tr>
+            <th>Icon</th>
+            <th>Class</th>
+            <th>Ligature</th>
+            <th>Code</th>
+          </tr>
+        </thead>
+        <tbody>
           
-            <div class="icons__item">
-              <i class="test-fonts test-fonts-4x attach"></i><br />
-              <span>.attach</span>
-            </div>
+          <tr>
+            <td><i class="test-fonts test-fonts-3x attach"></i></td>
+            <td>.attach</td>
+            <td>attach</td>
+            <td>
+              <pre>&lt;i class=&quot;test-fonts&quot;&gt;attach&lt;/i&gt;</pre>
+            </td>
+          </tr>
           
-            <div class="icons__item">
-              <i class="test-fonts test-fonts-4x chat-round"></i><br />
-              <span>.chat-round</span>
-            </div>
+          <tr>
+            <td><i class="test-fonts test-fonts-3x chat-round"></i></td>
+            <td>.chat-round</td>
+            <td>chat_round</td>
+            <td>
+              <pre>&lt;i class=&quot;test-fonts&quot;&gt;chat_round&lt;/i&gt;</pre>
+            </td>
+          </tr>
           
-      </div>
-      <h3>
-        <span>Ligature:&nbsp;</span>
-        <pre>&lt;i class=&quot;test-fonts&quot;&gt;attach&lt;/i&gt;</pre>
-      </h3>
-      <hr>
-      <div class="icons" id="icon-ligatures">
-          
-            <div class="icons__item">
-              <i class="test-fonts test-fonts-4x">attach</i><br />
-              <span>attach</span>
-            </div>
-          
-            <div class="icons__item">
-              <i class="test-fonts test-fonts-4x">chat_round</i><br />
-              <span>chat_round</span>
-            </div>
-          
-      </div>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      (function(document) {
+        'use strict';
+
+        var LightTableFilter = (function(Arr) {
+
+          var _input;
+
+          function _onInputEvent(e) {
+            _input = e.target;
+            var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+            Arr.forEach.call(tables, function(table) {
+              Arr.forEach.call(table.tBodies, function(tbody) {
+                Arr.forEach.call(tbody.rows, _filter);
+              });
+            });
+          }
+
+          function _filter(row) {
+            var text = row.children[2].textContent.toLowerCase(), val = _input.value.toLowerCase();
+            row.style.display = text.replace(/_/g, ' ').indexOf(val) === -1 ? 'none' : 'table-row';
+          }
+
+          return {
+            init: function() {
+              var inputs = document.getElementsByClassName('light-table-filter');
+              Arr.forEach.call(inputs, function(input) {
+                input.oninput = _onInputEvent;
+              });
+            }
+          };
+        })(Array.prototype);
+
+        document.addEventListener('readystatechange', function() {
+          if (document.readyState === 'complete') {
+            LightTableFilter.init();
+          }
+        });
+
+      })(document);
+    </script>
   </body>
 </html>

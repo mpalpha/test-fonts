@@ -157,10 +157,12 @@
 
 
 .test-fonts.attach::before {
-  content: "\ea01";
+  /* content: "\ea01"; */
+  content: "attach";
 }
 
 .test-fonts.chat-round::before {
-  content: "\ea02";
+  /* content: "\ea02"; */
+  content: "chat_round";
 }
 
