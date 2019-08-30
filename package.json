@@ -10,18 +10,18 @@
     "scss": "npx webfont assets/icons/*.svg -t assets/templates/$(node -p 'require(\"./package.json\").name').scss.njk --dest dist --dest-template dist --verbose --normalize -r '' --font-name $(node -p 'require(\"./package.json\").name') --template-cache-string $(node -p 'require(\"./package.json\").version')",
     "css": "npx webfont assets/icons/*.svg -t assets/templates/$(node -p 'require(\"./package.json\").name').css.njk --dest dist --dest-template dist --verbose --normalize -r '' --font-name $(node -p 'require(\"./package.json\").name') --template-cache-string $(node -p 'require(\"./package.json\").version')",
     "json": "npx webfont assets/icons/*.svg -t assets/templates/$(node -p 'require(\"./package.json\").name').json.njk --dest dist --dest-template dist --verbose --normalize -r '' --font-name $(node -p 'require(\"./package.json\").name') --template-cache-string $(node -p 'require(\"./package.json\").version')",
-    "build": "npx npm-run-all -p -r html css scss json",
+    "build": "npx run-s html css scss json",
     "rename": "npx rename -f dist/$(node -p 'require(\"./package.json\").name').html index.html",
     "archive": "npx jszip-cli a -v -i dist/*.zip -o dist/$(node -p 'require(\"./package.json\").name + \"_\" + require(\"./package.json\").version').zip dist/*",
-    "dist": "npx npm-run-all -s clean build rename copy",
+    "dist": "npx run-s clean build rename copy",
     "open": "npx open dist/index.html",
-    "serve": "npx npm-run-all dist open -s",
-    "postinstall": "npx npm-run-all dist",
+    "serve": "npx run-s dist open -s",
+    "postinstall": "npx run-s dist",
     "release": "npx release-it --no-npm.publish --no-git.requireCleanWorkingDir"
   },
   "release-it": {
     "hooks": {
-      "after:bump": "npm run dist archive && npx auto-changelog -p && git add . --all"
+      "after:bump": "npx run-s dist && npx auto-changelog -p && npx run-s archive && git add . --all"
     }
   },
   "auto-changelog": {
