@@ -20,11 +20,18 @@ nodejs 11+
 
 ### Changelog
 
+#### [1.0.6](https://github.com/mpalpha/test-fonts/compare/1.0.5...1.0.6) - 2019-08-30
+
+##### Commits
+
+- clean up demo filter function. [`7c0a36c`](https://github.com/mpalpha/test-fonts/commit/7c0a36c6d34899c952e1dc600d097aaf90dbe0de)
+
 #### [1.0.5](https://github.com/mpalpha/test-fonts/compare/1.0.4...1.0.5) - 2019-08-29
 
 ##### Commits
 
 - update templates, default example change to ligatures. [`59eb6fd`](https://github.com/mpalpha/test-fonts/commit/59eb6fd54ecafb4b3d6db410d73399ee524b824b)
+- Release 1.0.5 [`057c6ba`](https://github.com/mpalpha/test-fonts/commit/057c6ba18ed925c748045441b87887947fdfa7c2)
 
 #### [1.0.4](https://github.com/mpalpha/test-fonts/compare/1.0.3...1.0.4) - 2019-08-28
 

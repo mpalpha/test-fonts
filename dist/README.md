@@ -20,10 +20,17 @@ nodejs 11+
 
 ### Changelog
 
+#### [1.0.5](https://github.com/mpalpha/test-fonts/compare/1.0.4...1.0.5) - 2019-08-29
+
+##### Commits
+
+- update templates, default example change to ligatures. [`59eb6fd`](https://github.com/mpalpha/test-fonts/commit/59eb6fd54ecafb4b3d6db410d73399ee524b824b)
+
 #### [1.0.4](https://github.com/mpalpha/test-fonts/compare/1.0.3...1.0.4) - 2019-08-28
 
 ##### Commits
 
+- Release 1.0.4 [`ca61ba3`](https://github.com/mpalpha/test-fonts/commit/ca61ba36c83d1dd68291fc74dd5c30469f9f1230)
 - update task scripts [`dd6b5d7`](https://github.com/mpalpha/test-fonts/commit/dd6b5d7b07af7a007a2ce3345332bf14525a7f13)
 
 #### [1.0.3](https://github.com/mpalpha/test-fonts/compare/1.0.2...1.0.3) - 2019-08-28
