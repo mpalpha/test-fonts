@@ -15,7 +15,6 @@
     "dist": "run-s clean build changelog archive",
     "open": "open dist/index.html",
     "serve": "run-s dist open -s",
-    "postinstall": "run-s dist",
     "git-add": "git add . --all",
     "changelog": "auto-changelog -p && cpy dist/README.md ./",
     "release": "release-it --no-npm.publish --no-git.requireCleanWorkingDir"
