@@ -20,11 +20,18 @@ nodejs 11+
 
 ### Changelog
 
+#### [1.0.8](https://github.com/mpalpha/test-fonts/compare/1.0.7...1.0.8) - 2019-09-03
+
+##### Commits
+
+- remove postinstall task. [`c5e8821`](https://github.com/mpalpha/test-fonts/commit/c5e882162ffc856594fd44b8819bd54477e145d7)
+
 #### [1.0.7](https://github.com/mpalpha/test-fonts/compare/1.0.6...1.0.7) - 2019-09-03
 
 ##### Commits
 
 - update archive task. [`ccafc93`](https://github.com/mpalpha/test-fonts/commit/ccafc9376de525d40e64228b3a1f0f1f5c2b20d5)
+- Release 1.0.7 [`af83915`](https://github.com/mpalpha/test-fonts/commit/af83915db9fe5362cf86b8180916bdfc99bec95c)
 
 #### [1.0.6](https://github.com/mpalpha/test-fonts/compare/1.0.5...1.0.6) - 2019-08-30
 
