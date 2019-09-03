@@ -4,35 +4,37 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "clean": "npx rimraf dist/*",
-    "copy": "npx cpy README.md dist/",
-    "html": "npx webfont assets/icons/*.svg -t assets/templates/$(node -p 'require(\"./package.json\").name').html.njk --dest dist --dest-template dist --verbose --normalize --font-name $(node -p 'require(\"./package.json\").name') --template-cache-string $(node -p 'require(\"./package.json\").version')",
-    "scss": "npx webfont assets/icons/*.svg -t assets/templates/$(node -p 'require(\"./package.json\").name').scss.njk --dest dist --dest-template dist --verbose --normalize -r '' --font-name $(node -p 'require(\"./package.json\").name') --template-cache-string $(node -p 'require(\"./package.json\").version')",
-    "css": "npx webfont assets/icons/*.svg -t assets/templates/$(node -p 'require(\"./package.json\").name').css.njk --dest dist --dest-template dist --verbose --normalize -r '' --font-name $(node -p 'require(\"./package.json\").name') --template-cache-string $(node -p 'require(\"./package.json\").version')",
-    "json": "npx webfont assets/icons/*.svg -t assets/templates/$(node -p 'require(\"./package.json\").name').json.njk --dest dist --dest-template dist --verbose --normalize -r '' --font-name $(node -p 'require(\"./package.json\").name') --template-cache-string $(node -p 'require(\"./package.json\").version')",
-    "build": "npx run-s html css scss json",
-    "rename": "npx rename -f dist/$(node -p 'require(\"./package.json\").name').html index.html",
-    "archive": "npx jszip-cli a -v -i dist/*.zip -o dist/$(node -p 'require(\"./package.json\").name + \"_\" + require(\"./package.json\").version').zip dist/*",
-    "dist": "npx run-s clean build rename copy",
-    "open": "npx open dist/index.html",
-    "serve": "npx run-s dist open -s",
-    "postinstall": "npx run-s dist",
-    "release": "npx release-it --no-npm.publish --no-git.requireCleanWorkingDir"
+    "clean": "rimraf dist/*",
+    "fonts": "webfont assets/icons/*.svg --dest dist --verbose --normalize --font-name $(node -p 'require(\"./package.json\").name')",
+    "html": "webfont assets/icons/*.svg -t assets/templates/index.html.njk --dest dist --dest-template dist --verbose --normalize  -r '' --font-name $(node -p 'require(\"./package.json\").name') --template-cache-string $(node -p 'require(\"./package.json\").version')",
+    "scss": "webfont assets/icons/*.svg -t assets/templates/$(node -p 'require(\"./package.json\").name').scss.njk --dest dist --dest-template dist --verbose --normalize -r '' --font-name $(node -p 'require(\"./package.json\").name') --template-cache-string $(node -p 'require(\"./package.json\").version')",
+    "css": "webfont assets/icons/*.svg -t assets/templates/$(node -p 'require(\"./package.json\").name').css.njk --dest dist --dest-template dist --verbose --normalize -r '' --font-name $(node -p 'require(\"./package.json\").name') --template-cache-string $(node -p 'require(\"./package.json\").version')",
+    "json": "webfont assets/icons/*.svg -t assets/templates/$(node -p 'require(\"./package.json\").name').json.njk --dest dist --dest-template dist --verbose --normalize -r '' --font-name $(node -p 'require(\"./package.json\").name') --template-cache-string $(node -p 'require(\"./package.json\").version')",
+    "build": "run-p fonts html css scss json",
+    "archive": "cd dist && bestzip $(node -p 'require(\"../package.json\").name + \"_\" + require(\"../package.json\").version').zip * && cd ..",
+    "dist": "run-s clean build changelog archive",
+    "open": "open dist/index.html",
+    "serve": "run-s dist open -s",
+    "postinstall": "run-s dist",
+    "git-add": "git add . --all",
+    "changelog": "auto-changelog -p && cpy dist/README.md ./",
+    "release": "release-it --no-npm.publish --no-git.requireCleanWorkingDir"
   },
   "release-it": {
     "hooks": {
-      "after:bump": "npx run-s dist && npx auto-changelog -p && npx run-s archive && git add . --all"
+      "after:bump": "run-s dist git-add"
     }
   },
   "auto-changelog": {
-    "output": "README.md",
+    "output": "dist/README.md",
     "template": "assets/templates/changelog.hbs"
   },
   "devDependencies": {
+    "auto-changelog": "^1.16.0",
+    "bestzip": "^2.1.4",
     "cpy": "^7.3.0",
     "cpy-cli": "^2.0.0",
-    "jszip": "^3.2.2",
-    "jszip-cli": "^1.4.24",
+    "mem": "^5.1.1",
     "npm-run-all": "^4.1.5",
     "open": "^6.4.0",
     "open-cli": "^5.0.0",
@@ -52,7 +54,5 @@
     "url": "https://github.com/mpalpha/test-fonts/issues"
   },
   "homepage": "https://github.com/mpalpha/test-fonts#readme",
-  "dependencies": {
-    "mem": "^5.1.1"
-  }
+  "dependencies": {}
 }

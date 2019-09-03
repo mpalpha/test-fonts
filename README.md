@@ -20,11 +20,7 @@ nodejs 11+
 
 ### Changelog
 
-#### [1.0.6](https://github.com/mpalpha/test-fonts/compare/1.0.5...1.0.6) - 2019-08-30
-
-##### Commits
-
-- clean up demo filter function. [`7c0a36c`](https://github.com/mpalpha/test-fonts/commit/7c0a36c6d34899c952e1dc600d097aaf90dbe0de)
+#### [1.0.6](https://github.com/mpalpha/test-fonts/compare/1.0.6...1.0.6) - 2019-09-03
 
 #### [1.0.5](https://github.com/mpalpha/test-fonts/compare/1.0.4...1.0.5) - 2019-08-29
 
